@@ -1,0 +1,155 @@
+/*
+COLORS:
+
+Light green: #7ed56f
+Medium green: #55c57a
+Dark green: #28b485
+
+*/
+
+/* reset */
+* {
+    margin: 0;
+    padding: 0;
+    /* DIMENSIONAMENTO DA CAIXA -
+    ALTERAR O MODELO DE CAIXA PARA QUE AS BORDAS E
+    OS PREENCHIMENTOS NÃO SEJAM MAIS ADICIONADOS A LARGURA TOTAL OU ALTURA TOTAL ESPECIFICADA PARA UMA CAIXA.
+    SEM ISSO, QUAISQUER PREENCHIMENTOS E BORDA SÃO ADICIONADOS A ALTURA OU A LARGURA DE UM ELEMENTO*/
+    box-sizing: border-box;
+}
+
+body {
+    font-family: "Lato", sans-serif;
+    font-weight: 400;
+    font-size: 16px;
+    /* 1.7 vezes maior que a altura da linha pré-definida. */
+    line-height: 1.7;
+    color: #777;
+    padding: 30px;
+}
+
+.header {
+    /* DEVE SE 95% DA ALTURA DA JANELA DE VISUALIZAÇÃO */
+    height: 95vh;
+    /* GRADIENTE E A DIREÇÃO QUE O GRADIENTE VAI (DIREITA, SEGUINDO AS DUAS CORES)*/
+    /*background-image: linear-gradient(to right bottom, #7ed56f, #28b485), url(../img/hero.jpg);*/
+    background-image: linear-gradient(
+            to right bottom,
+            rgba(126, 213, 111, 0.8),
+            rgba(40, 180, 131, 0.8)),
+    url(../img/hero.jpg);
+    /*QUALQUER QUE SEJA A LARGURA DA VIEWPORT, OU O ELEMENTO, ELA SEMPRE TENTARÁ ENCAIXAR O ELEMENTO DENTRO DA CAIXA   */
+    background-size: cover;
+    background-position: top;
+    position: relative;
+
+    /*ESPECIFICAR UM POLÍGONO NO QUAL A IMAGEM OU O ELEMENTO AINDA ESTARÁ VISÍVEL (CORTA A IMAGEM)*/
+    /*polygon(x y, x y, x y)*/
+    clip-path: polygon(0 0, 100% 0, 100% 75vh, 0 100%);
+}
+
+.logo-box {
+    position: absolute;
+    top: 40px;
+    left: 40px;
+}
+
+.logo {
+    /*BROWSER CALCULA A LARGURA AUTOMATICAMENTE QUANDO ESPECIFICADO SOMENTE A ALTURA*/
+    height: 35px;
+}
+
+/*ANIMAÇÃO ACONTECE QUANDO COLOCO O MOUSE EM CIMA DA LOGO*/
+/*.logo:hover {*/
+/*    animation: moveInRight 1s ease-out;*/
+/*}*/
+
+.text-box {
+    position: absolute;
+    top: 40%;
+    left: 50%;
+    /* POSICIONANDO O TEXT-BOX NO CENTRO DO ELEMENTO*/
+    transform: translate(-50%, -50%);
+}
+
+.heading-primary {
+    color: #fff;
+    text-transform: uppercase;
+
+    /*PARA PREVINIR QUE AS ANIMAÇÕES DOS FILHOS DESSA CLASSE MOVIMENTE (BUG, NÃO SE SABEM AO CERTO O PQ DISSO ACONTECER)*/
+    backface-visibility: hidden;
+}
+
+.heading-primary-main {
+    display: block;
+    font-size: 60px;
+    font-weight: 400;
+    letter-spacing: 35px;
+    
+    animation-name: moveInLeft;
+    animation-duration: 1s;
+    animation-timing-function: ease-out;
+
+    /*COMO A ANIMAÇÃO VAI PROCEGUIR, QUAO RAPIDO OU QUAO LENTO*/
+    /*COMEÇA RÁPIDO E FICA DEVAGAR*/
+    /*animation-timing-function: ease-out;*/
+    
+    /* VEZES QUE A ANIMAÇÃO ACONTECE
+    animation-iteration-count: 3;*/
+    /* TEMPO QUE A ANIMAÇÃO DEMORA PARA COMEÇAR
+    animation-delay: 3s;*/
+}
+
+.heading-primary-sub {
+    display: block;
+    font-size: 20px;
+    font-weight: 700;
+    letter-spacing: 17.4px;
+
+
+    animation: moveInRight 1s ease-out;
+    /*animation-name: moveInRight;*/
+    /*animation-duration: 1s;*/
+    /*animation-timing-function: ease-out;*/
+}
+
+/* ANIMAÇÕES */
+/* 0% ONDE A ANIMAÇÃO COMEÇA
+   100% ONDE A ANIMAÇÃO FINALIZA*/
+@keyframes  moveInLeft{
+    0%{
+        opacity: 0;
+        /*transform: translateX(-100px) rotate(50deg);*/
+        transform: translateX(-100px);
+    }
+
+    /*60%{*/
+    /*    !*deg É UTILIZADO PARA ROTAÇÃO*!*/
+    /*    transform: rotate(180deg);*/
+    /*}*/
+
+    80% {
+        transform: translateX(10px);
+    }
+    
+    100% {
+        opacity: 1;
+        transform: translate(0);
+    }
+}
+
+@keyframes  moveInRight{
+    0%{
+        opacity: 0;
+        transform: translateX(100px);
+    }
+
+    80% {
+        transform: translateX(-10px);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translate(0);
+    }
+}
