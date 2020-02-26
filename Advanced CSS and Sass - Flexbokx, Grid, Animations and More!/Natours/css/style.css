@@ -70,6 +70,7 @@ body {
     left: 50%;
     /* POSICIONANDO O TEXT-BOX NO CENTRO DO ELEMENTO*/
     transform: translate(-50%, -50%);
+    text-align: center;
 }
 
 .heading-primary {
@@ -78,6 +79,7 @@ body {
 
     /*PARA PREVINIR QUE AS ANIMAÇÕES DOS FILHOS DESSA CLASSE MOVIMENTE (BUG, NÃO SE SABEM AO CERTO O PQ DISSO ACONTECER)*/
     backface-visibility: hidden;
+    margin-bottom: 60px;
 }
 
 .heading-primary-main {
@@ -116,7 +118,7 @@ body {
 /* ANIMAÇÕES */
 /* 0% ONDE A ANIMAÇÃO COMEÇA
    100% ONDE A ANIMAÇÃO FINALIZA*/
-@keyframes  moveInLeft{
+@keyframes moveInLeft{
     0%{
         opacity: 0;
         /*transform: translateX(-100px) rotate(50deg);*/
@@ -138,7 +140,7 @@ body {
     }
 }
 
-@keyframes  moveInRight{
+@keyframes moveInRight{
     0%{
         opacity: 0;
         transform: translateX(100px);
@@ -152,4 +154,81 @@ body {
         opacity: 1;
         transform: translate(0);
     }
+}
+
+@keyframes moveInBottom {
+    0%{
+        opacity: 0;
+        transform: translateX(100px);
+    }
+
+    80% {
+        transform: translateX(-10px);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translate(0);
+    }
+}
+
+/*link É UMA PSEUDO CLASSE
+PSEUDO CLASSES SÃO ESTADOS ESPECIAIS
+LINK É ESTADO DO SELETOR
+ACONTECE QUANDO O USUÁRIO PASSA O MOUSE SOBRE O ELEMENTO PARA TER COMPARTAMENTO DE UM LINK
+VISITED ACONTECE QUANDO O BOTAO JÁ FOI CLICADO E O ESTADO FICA VISITADO*/
+.btn:link,
+.btn:visited {
+    text-transform: uppercase;
+    text-decoration: none;
+    padding: 15px 40px;
+    display: inline-block;
+    border-radius: 100px;
+    transition: all .2s;
+    position: relative;
+}
+
+/*MOUSE EM CIMA*/
+.btn:hover {
+    /*FAZ SUBIR QUANDO COLOCA O MOUSE EM CIMA*/
+    transform: translateY(-3px);
+    /*PRIMEIRO VALOR É A DIREÇÃO DO X, OU SEJA 0*/
+    /*SEGUNDA É O Y*/
+    /*TERCEIRO VALOR É O BORRÃO*/
+    box-shadow: 0 10px 20px rgba(0, 0, 0, .2);
+}
+
+/*CLICK*/
+.btn:active {
+    transform: translateY(-1px);
+    box-shadow: 0 5px 10px rgba(0, 0, 0, .2);
+}
+
+.btn-white {
+    background-color: #fff;
+    color: #777;
+}
+
+/*COMO SE CRIASSE UM ELEMENTO IGUAL O BTN LOGO DEPOIS DELE*/
+.btn::after {
+    /*TEM QUE ESPECIFICAR UM CONTEÚDO SE NÃO, NÃO IRÁ APARECER*/
+    content: "";
+    display: inline-block;
+    height: 100%;
+    width: 100%;
+    border-radius: 100px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: -1;
+    transition: all .4s;
+}
+
+.btn-white::after{
+    background-color: #ffffff;
+}
+.btn:hover::after {
+    /*transform: scale(1.5);*/
+    transform: scaleX(1.4) scaleY(1.6);
+    opacity: 0;
 }
