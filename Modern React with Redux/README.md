@@ -57,3 +57,23 @@ if (module.hot) {
 ![](imgs/09.png)
 ![](imgs/10.png)
 * First braces indicate de javascript variable and second meant a javascript object.
+
+# Three Tenets of Components
+![](imgs/11.png)
+
+# Open Source Styling CSS framework
+* https://semantic-ui.com
+* https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.css
+* https://cdnjs.com/libraries/semantic-ui
+
+# Library that helps developing with mocks
+* faker.js
+* https://github.com/marak/Faker.js/
+* npm install --save faker
+
+# Creating a Reusable Configurable Component
+![](imgs/12.png)
+
+# Props
+![](imgs/13.png)
+* Example show different names in comments.
