@@ -77,3 +77,11 @@ if (module.hot) {
 # Props
 ![](imgs/13.png)
 * Example show different names in comments.
+
+# Class Components
+![](imgs/14.png)
+![](imgs/15.png)
+![](imgs/16.png)
+![](imgs/17.png)
+![](imgs/18.png)
+* STATE CAN **ONLY** BE UPDATED USING THE FUNCTION 'setState'
