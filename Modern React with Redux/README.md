@@ -85,3 +85,65 @@ if (module.hot) {
 ![](imgs/17.png)
 ![](imgs/18.png)
 * STATE CAN **ONLY** BE UPDATED USING THE FUNCTION 'setState'
+
+# Component Lifecycle
+![](imgs/19.png)
+![](imgs/20.png)
+
+
+# Solving Context Issues
+
+```javascript
+
+class Car {
+  constructor() {
+    //OLD FASHION
+    this.drive = this.drive.bind(this);
+  }
+
+  setDriveSound(sound) {
+    this.sound = sound;
+  }
+
+  drive() {
+    return this.sound;
+  }
+
+}
+
+const Car = new Car();
+car.setDriveSound('vroom');
+
+const drive = car.drive;
+
+drive(); //IF WITHOUT CONSTRUCTOR THE RETURN WILL BE 'cannot read undefined'
+
+```
+
+```javascript
+class Car {
+  setDriveSound(sound) {
+    this.sound = sound;
+  }
+
+
+  //OTHER WAY
+  drive = () => {
+    return this.sound;
+  }
+
+}
+
+const Car = new Car();
+car.setDriveSound('vroom');
+
+const drive = car.drive;
+
+drive(); //IF WITHOUT CONSTRUCTOR THE RETURN WILL BE 'cannot read undefined'
+
+```
+
+# React Refs
+
+* Gives access to a single DOM element
+* We create refs in constructor, assign them to instance variables, then pass to a particular JSX element as props.
