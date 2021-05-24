@@ -147,3 +147,107 @@ drive(); //IF WITHOUT CONSTRUCTOR THE RETURN WILL BE 'cannot read undefined'
 
 * Gives access to a single DOM element
 * We create refs in constructor, assign them to instance variables, then pass to a particular JSX element as props.
+
+# React Hooks
+
+![](imgs/21.png)
+![](imgs/22.png)
+
+# Understanding useState
+
+```javascript
+//ARRAY DESTRUCTURING
+
+const colors = ['red', 'green'];
+
+colors[0]; // 'red'
+
+colors[1]; // 'green'
+
+const redColor = colors[0];
+const greenColor = colors[1];
+
+const [firstElement, secondElement] = colors;
+
+const [x, setX] = useState(null); // CREATE ARRAY WITH 2 ELEMENTS, ONE PROPERTY ANOTHER FUNCTION
+
+//IT IS THE SAME
+const things = useState(null);
+const activeThings = things[0];
+const setActiveThings = things[1];
+
+```
+
+![](imgs/23.png)
+![](imgs/24.png)
+![](imgs/25.png)
+
+# The 'useEffect' Hook
+
+* Allows function components to use something like lifecycle methods
+* We configure the hook to run some code automatically in one of three scenarios.
+* 1 - When the component is rendered for the first time only
+* 2 - Whne the component is rendered **for the first time and whenever it rerenders**.
+* 3 - When the component is reendered **for the first time and whenever it rerenders and some piece of data has changed**.
+
+```javascript
+useEffect(() => {
+    console.log('I RUN EVERY RENDER AND AT INITIAL RENDER ');
+  });
+
+  useEffect(() => {
+    console.log('I RUN EVERY INITIAL RENDER ');
+  }, []);
+
+
+  useEffect(() => {
+    console.log('I RUN EVERY RENDER AND WHEN TERM CHANGES');
+  }, [term]);
+
+```
+
+
+# ASYNC FUNCTION AT useEffect
+
+```javascript
+// CANNOT USE ASYNC IN THIS FUNCTION
+useEffect(() => {
+  
+
+  //SOLUTION 1
+  //THIS IS ALLOWED    
+  const search = async () => {
+    await axios.get('asdada');
+  };
+  search();
+
+
+  //SOLUTION 2
+  //DEFINES A FUNCTION AND EXECUTE IT
+  (async () => {
+    await axios.get('asdada');
+  })();
+
+
+  //SOLUTION 3
+  //USING PROMISE
+  axios.get('sadada')
+    .then((response) => {
+      console.log(response.data)
+    });
+
+}, [term]);
+
+
+```
+
+
+# XSS ATTACKS IN REACT
+
+```jsx
+
+<span dangerouslySetInnerHTML={{ __html: result.snippet }}></span>
+
+```
+
+* Execute javascript in our application
