@@ -289,3 +289,20 @@ useEffect(() => {
   * We are going to build some navigation stuff from scratch!
   * React-Router will be convered later in the course!!!
 
+
+# Custom Hooks
+
+* Best way to create reusable code in a React Project (besides components).
+* Creating by extracting hook-related code out of a function component.
+* Custom hooks always make use of at least one primitive hook internally.
+* Each custom hook should have one purpose.
+* Kind of an art form!
+* Data-fetching is a great thing to try to make reusable.
+
+# Process for creating reusable hooks
+
+* Identify each line of code related to some single purpose.
+* Identify the inputs to that code.
+* Identify the outputs to that code.
+* Extract all of the code into a separate function, receiving the inputs as arguments, and returning the outputs.
+
