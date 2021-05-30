@@ -196,7 +196,7 @@ useEffect(() => {
   });
 
   useEffect(() => {
-    console.log('I RUN EVERY INITIAL RENDER ');
+    console.log('I RUN EVERY INITIAL RENDER');
   }, []);
 
 
@@ -251,3 +251,41 @@ useEffect(() => {
 ```
 
 * Execute javascript in our application
+
+# useEffect's Cleanup Function
+
+
+```javascript
+
+useEffect(() => {
+  console.log("Initial render or term was changed");
+
+  return () => {
+    console.log("CLEANUP"); // ALWAYS EXECUTE FIRST AFTER INITIAL RENDER
+  };
+
+}, [term]);
+
+```
+
+* Initial Component Render
+  * Func provided to useEffect is called
+  * Return a cleanup function
+* Rerender
+  * Invoke the cleanup function
+  * Function provided to useEffect is called again
+  * Return a cleanup function
+
+
+
+# Navigation
+
+* Showing different sets of components when the URL changes.
+
+* Majority of React apps use React-Router
+  * However...
+  * React Router has frequent breaking changes
+  * More important to learn the ideas and theory of navigation
+  * We are going to build some navigation stuff from scratch!
+  * React-Router will be convered later in the course!!!
+
