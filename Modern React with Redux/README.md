@@ -306,3 +306,43 @@ useEffect(() => {
 * Identify the outputs to that code.
 * Extract all of the code into a separate function, receiving the inputs as arguments, and returning the outputs.
 
+# Deployment Overview
+
+![](imgs/26.png)
+![](imgs/27.png)
+
+# Deployments Tools
+
+## Vercel Deployment - 100% Free!
+
+* Sign up at vercel.com
+* Install the Vercel CLI
+  * npm install -g vercel
+  * Open terminal as administrator
+* Run 'vercel login'
+  * Enter your email address that is associated with vercel.com
+  * Check email
+* Run 'vercel' in our directory project
+  * Enter every question
+* To redeploy run 'vercel --prod'
+
+
+## Netlify Deployment 
+
+* Create a github repo for your project.
+* Commit changes to your project locally
+* Link your project to the new repo
+* Push your code to github
+* Sign up for an account netlify.com
+* Link your github account, select the repo you want to deploy.
+
+
+# Redux
+
+* State management library
+* Makes creating complex applications easier
+* Not required to create a React app!
+* Not explicity designed to work with React!
+
+
+
