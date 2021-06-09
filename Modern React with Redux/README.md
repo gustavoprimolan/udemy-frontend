@@ -344,5 +344,194 @@ useEffect(() => {
 * Not required to create a React app!
 * Not explicity designed to work with React!
 
+# Redux Cycle
+![](imgs/28.png)
+![](imgs/29.png)
+![](imgs/30.png)
 
+```javascript
+// https://codepen.io/sgrider/pres/oQjBvG
+console.clear();
+
+// People dropping off a form (Action Creators)
+const createPolicy = (name, amount) => {
+  return { // Action (a form in our analogy)
+    type: 'CREATE_POLICY',
+    payload: {
+      name: name,
+      amount: amount
+    }
+  };
+};
+
+const deletePolicy = (name) => {
+  return {
+    type: 'DELETE_POLICY',
+    payload: {
+      name: name
+    }
+  };
+};
+
+const createClaim = (name, amountOfMoneyToCollect) => {
+  return {
+    type: 'CREATE_CLAIM',
+    payload: {
+      name: name,
+      amountOfMoneyToCollect: amountOfMoneyToCollect
+    }
+  };
+};
+
+
+// Reducers (Departments!)
+const claimsHistory = (oldListOfClaims = [], action) => {
+  if (action.type === 'CREATE_CLAIM') {
+    // we care about this action (FORM!)
+    return [...oldListOfClaims, action.payload];
+  }
+  
+  // we don't care the action (form!!)
+  return oldListOfClaims;
+};
+
+const accounting = (bagOfMoney = 100, action) => {
+  if (action.type === 'CREATE_CLAIM') {
+    return bagOfMoney - action.payload.amountOfMoneyToCollect;
+  } else if (action.type === 'CREATE_POLICY') {
+    return bagOfMoney + action.payload.amount;
+  }
+  
+  return bagOfMoney;
+};
+
+const policies = (listOfPolicies = [], action) => {
+  if (action.type === 'CREATE_POLICY') {
+    return [...listOfPolicies, action.payload.name];
+  } else if (action.type === 'DELETE_POLICY') {
+    return listOfPolicies.filter(name => name !== action.payload.name);
+  }
+  
+  return listOfPolicies;
+};
+
+const { createStore, combineReducers } = Redux;
+
+const ourDepartments = combineReducers({
+  accounting: accounting,
+  claimsHistory: claimsHistory,
+  policies: policies
+});
+
+const store = createStore(ourDepartments);
+
+createPolicy('Alex', 20)
+createClaim('Alex', 120)
+deletePolicy('Alex')
+
+store.dispatch(createPolicy('Alex', 20));
+store.dispatch(createPolicy('Jim', 30));
+store.dispatch(createPolicy('Bob', 40));
+
+// store.dispatch(createClaim('Alex', 120));
+// store.dispatch(createClaim('Jim', 50));
+
+// store.dispatch(deletePolicy('Bob'));
+
+console.log(store.getState());
+
+```
+
+# The connect function
+
+```javascript 
+
+function connect() {
+  return function() {
+    return 'Hi There';
+  }
+}
+
+connect()(); // Hi There
+
+```
+
+# Component with redux
+
+```javascript
+
+import React, { Component } from "react";
+import { connect } from "react-redux";
+import { selectSong } from "../actions";
+
+class SongList extends Component {
+  renderList() {
+    return this.props.songs.map((song) => {
+      return (
+        <div className="item" key={song.title}>
+          <div className="right floated content">
+            <button onClick={() => this.props.selectSong(song)} className="ui button primary">Select</button>
+          </div>
+          <div className="content">{song.title}</div>
+        </div>
+      );
+    });
+  }
+
+  render() {
+    //IT WILL GET mapStateToProp return;
+    // console.log(this.props);
+    return <div className="ui divided list">{this.renderList()}</div>;
+  }
+}
+
+//THE NAME IS A CONVETION
+//EVERY TIME EXECUTE SELECT BUTTON THIS METHOD SHOULD RERUN
+const mapStateToProp = (state) => {
+  console.log(state);
+
+  return { songs: state.songs };
+};
+
+//connect will get the reducer exported and execute mapStateToProp function to SongList Component
+export default connect(mapStateToProp, { selectSong })(SongList);
+
+```
+
+# Redux is not magic!
+* Redux does not automatically detect action creators being called.
+* Redux does not automatically detect a function returning an object that is an 'action'
+
+# Libraries
+
+* redux - the redux library
+* react-redux - Integration layer between react and redux
+* axios - Helps us make network requests
+* redux-thunk - Middleware to help us make requests in a redux application
+
+# General Data Loading with Redux
+
+* Component gets rendered onto the screen
+* Component's 'componentDidMount' lifecycle method gets called
+* We call action creator from 'componentDidMount'
+* Action creator runs code to make an API request
+* API responds with data
+* Action creator returns an action with the fetched data on the 'payload' property
+* Some reducer sees the action, returns the data off the 'payload'
+* Because we generated some new state object, redux/react-redux cause our React app to be rerendered
+![](imgs/31.png)
+
+# Synchronous action creator vs Asynchronous action creator
+
+* Instantly returns an action with data ready to go. - Synchronous
+* Takes some amount of time for it to get its data ready to go - Asynchronous
+![](imgs/32.png)
+
+# Middleware in Redux
+
+* Function that gets called with every action we dispatch.
+* Has the ability to STOP, MODIFY, or otherwise mess around with actions.
+* Tons of open source middleware exist.
+* Most popular use of middleware is for dealing with async actions.
+* We are going to usea middleware called 'Redux-Thunk' to solve our async issues. 
 
