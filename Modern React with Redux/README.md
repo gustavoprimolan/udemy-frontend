@@ -535,3 +535,45 @@ export default connect(mapStateToProp, { selectSong })(SongList);
 * Most popular use of middleware is for dealing with async actions.
 * We are going to usea middleware called 'Redux-Thunk' to solve our async issues. 
 
+# Rules of Reducers
+
+* Must return any values besides 'undefined'
+* Produces 'state', or data to be used inside of your app using only previous state and the action (reducers are pure)
+* Must not return reach 'out of itself' to decide what value to return;
+* Must not mutate its input 'state' argument - If do it will render all react components
+
+# Safe State Updates in Reducers
+![](imgs/33.png)
+
+# React Router
+
+* react-router -> Core navigation lib - we don't need install this manually
+* react-router-dom -> Navigation for dom-based apps (we want this!)
+* react-router-native -> Navigation for react-native apps
+* react-router-redux -> Bindings between Redux and React Router (not necessary)
+
+# Bad Navigation - ANCHOR TAG (USE Link component instead)
+
+* You add an <a /> tag to your application with href="pagetwo" and click it
+* Your browser makes a request to localhost:3000
+* Development server responds with index.html file
+* Browser receives index.html file, dumps old HTML file it was showing (including  all of your React/Redux state data!)
+* index.html file lists our JS files in script tags - browser downloads and executes these scripts
+* Our app starts up.  
+
+# Good Navigation
+
+* User wants to navigate to another page in our app
+* User clicks a 'Link' tag
+* React Router prevents the browser from navigating to the new page and fetching new index.html file1
+* URL still changes
+* 'History' sees updated URL, takes URL and sends it to BrowserRouter
+* BrowserRouter communicates the URL to Route components
+
+# Types of Routers
+
+* BrowserRouter -> Uses everything after TLD (.com, .net) or port as the 'path' - Ex: localhost:3000/pagetwo
+
+* Hash Router -> Uses everything after a # as the 'path' - Ex: localhost:3000/#/pagetwo
+
+* MemoryRouter -> Doesn't use the URL to track navigation - Ex: localhost:3000
