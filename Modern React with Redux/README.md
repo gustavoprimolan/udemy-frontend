@@ -577,3 +577,23 @@ export default connect(mapStateToProp, { selectSong })(SongList);
 * Hash Router -> Uses everything after a # as the 'path' - Ex: localhost:3000/#/pagetwo
 
 * MemoryRouter -> Doesn't use the URL to track navigation - Ex: localhost:3000
+
+# Handling Authentication with React
+
+![](imgs/34.png)
+![](imgs/35.png)
+![](imgs/36.png)
+![](imgs/37.png)
+
+# Steps for Setting Up OAuth
+
+* Create a new project at console.developers.google.com
+* Set up an OAuth confirmation screen
+* Generate an OAuth Client ID
+* Install Google's API library, initialize it with the OAuth Client ID
+* Make sure the lib gets called any time the user clicks on 'Login with Google' button.
+
+
+# Redux Dev Tools
+
+* github.com/zalmoxisus/redux-devtools-extension
