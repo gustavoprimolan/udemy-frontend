@@ -597,3 +597,81 @@ export default connect(mapStateToProp, { selectSong })(SongList);
 # Redux Dev Tools
 
 * github.com/zalmoxisus/redux-devtools-extension
+* localhost:3000?debug_session=<some_string>
+
+# Redux Form
+
+* Installation
+* In the upcoming lecture, we will be installing Redux Form into our application. If you are using the latest Node v15 and npm v7 releases, this will fail with the following error:
+* code ERESOLVE
+* npm ERR! ERESOLVE unable to resolve dependency tree
+* This is caused by some fairly significant breaking changes NPM is making, which can read about here:
+* https://blog.npmjs.org/post/626173315965468672/npm-v7-series-beta-release-and-semver-majory
+* If you are using NPM, you'll need to run this command instead:
+* npm install redux-form --legacy-peer-deps
+* If you are using Yarn, no further changes will be needed and you can install as you would typically:
+* yarn add redux-form
+* Note - Do not mix the use of yarn and npm in the same project, this will cause some serious dependency conflicts.
+* React Final Form
+* We highly recommend finishing the Streaming / Twitch Clone project in Sections 23 to 26 with Redux Form so that you fully understand how everything fits together as shown in the lectures. The migration to Final Form is fairly simple in regards to the completed project code and can be found in this supplemental lecture note here:
+* https://www.udemy.com/course/react-redux/learn/lecture/26637172#questions
+
+![](imgs/38.png)
+
+# Creating server
+
+* www.npmjs.com/package/json-server
+* npm init --- enter enter enter
+* npm install --save json-server
+* Create db.json
+* Change script attribute in package.json
+
+# Object-Based Reducer
+
+![](imgs/39.png)
+![](imgs/40.png)
+![](imgs/41.png)
+
+## Array-based approach
+
+```javascript
+// SAMPLE CODE
+const streamReducer = (state=[], action) => {
+  switch(action.type){
+    case EDIT_STREAM: 
+      return state.map(stream => {
+        if(stream.id === action.payload.id) {
+          return action.payload;
+        }
+        return stream;
+      });
+    default:
+      return state;
+  }
+};
+
+```
+
+## Object-based approach
+
+```javascript
+const streamReducer = (state={}, action) => {
+  switch (action.type) {
+    case EDIT_STREAM:
+      //ITS NEEDED TO NOT GET THE REFERENCE
+      // const newState = {...state};
+      // newState[action.payload.id] = action.payload;
+      // return newState;
+
+      //KEY INTERPOLATION SYNTAX
+      return {...state, [action.payload.id]: action.payload};
+    default: 
+      return state;
+  }
+};
+
+```
+
+# Merging list of Records - Lodash
+
+![](imgs/42.png)
