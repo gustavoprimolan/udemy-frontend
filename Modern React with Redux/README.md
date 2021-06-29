@@ -675,3 +675,34 @@ const streamReducer = (state={}, action) => {
 # Merging list of Records - Lodash
 
 ![](imgs/42.png)
+
+# History Object Deprecation Warning
+
+* In the next lecture we are going to be creating our history object. As of React Router DOM v4.4.0 you will get a warning in your console:
+
+* Warning: Please use `require("history").createBrowserHistory` instead of `require("history/createBrowserHistory")`. Support for the latter will be removed in the next major release.
+
+* To fix, our history.js file should instead look like this:
+
+* import { createBrowserHistory } from 'history'; 
+* export default createBrowserHistory();
+
+# Component Isolation with React Router
+* User types in /streams/edit/3 to address bar and hits enter
+* User loads up our app
+* Redux state object is empty
+* We try to select stream with id '3' from state
+* No streams were loaded, so weget undefined
+* We navigate do '/'
+* StreamList fetches all of our streams, update Redux state
+* We navigate back to stream with id 3
+* Data is now in redux store, so we see the appropriate stream
+* **With React-Router, each component needs to be designed to work in isolation (fetch its own data!)**
+
+# Why Use Portals?
+
+![](imgs/43.png)
+
+* Stacking context
+![](imgs/44.png)
+![](imgs/45.png)
