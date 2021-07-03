@@ -706,3 +706,112 @@ const streamReducer = (state={}, action) => {
 * Stacking context
 ![](imgs/44.png)
 ![](imgs/45.png)
+
+# React Fragment
+![](imgs/46.png)
+
+# RTMP NodeMediaServer is not a constructor error fix
+* In the next lecture we will install the Node Media Server package and create our RTMP server. Our index.js needs a slight modification to the import for v.2.1.0
+* https://github.com/illuspas/Node-Media-Server#npm-version-recommended
+* Instead of:
+* const { NodeMediaServer } = require('node-media-server');
+* we need to change the import to this:
+* const NodeMediaServer = require('node-media-server');
+
+
+# Refactor to use React Final Form instead of Redux Form
+* Here is the refactored code for the Streams project to replace Redux Form with React Final Form. The main updates will only need to be with the StreamForm component and a small update to the combineReducers function. The rest of the application will remain unchanged.
+
+* Official migration guide for more details:
+* https://final-form.org/docs/react-final-form/migration/redux-form
+
+```javascript
+// Install React Final Form
+/// npm install final-form react-final-form
+// reducers/index.js
+
+import { combineReducers } from "redux";
+ 
+import authReducer from "./authReducer";
+import streamReducer from "./streamReducer";
+ 
+export default combineReducers({
+  auth: authReducer,
+  streams: streamReducer,
+});
+StreamForm component
+
+import React from "react";
+import { Form, Field } from "react-final-form";
+ 
+const StreamForm = (props) => {
+  const renderError = ({ error, touched }) => {
+    if (touched && error) {
+      return (
+        <div className="ui error message">
+          <div className="header">{error}</div>
+        </div>
+      );
+    }
+  };
+ 
+  const renderInput = ({ input, label, meta }) => {
+    const className = `field ${meta.error && meta.touched ? "error" : ""}`;
+    return (
+      <div className={className}>
+        <label>{label}</label>
+        <input {...input} autoComplete="off" />
+        {renderError(meta)}
+      </div>
+    );
+  };
+ 
+  const onSubmit = (formValues) => {
+    props.onSubmit(formValues);
+  };
+ 
+  return (
+    <Form
+      initialValues={props.initialValues}
+      onSubmit={onSubmit}
+      validate={(formValues) => {
+        const errors = {};
+ 
+        if (!formValues.title) {
+          errors.title = "You must enter a title";
+        }
+ 
+        if (!formValues.description) {
+          errors.description = "You must enter a description";
+        }
+ 
+        return errors;
+      }}
+      render={({ handleSubmit }) => (
+        <form onSubmit={handleSubmit} className="ui form error">
+          <Field name="title" component={renderInput} label="Enter Title" />
+          <Field
+            name="description"
+            component={renderInput}
+            label="Enter Description"
+          />
+          <button className="ui button primary">Submit</button>
+        </form>
+      )}
+    />
+  );
+};
+ 
+export default StreamForm;
+```
+
+# The Context System with React
+
+* Props System - Gets data from a parent component to a direct child component
+* Context System - Gets data from a parent component to any nested child component
+
+* App -> Header -> Button
+
+![](imgs/47.png)
+![](imgs/48.png)
+
