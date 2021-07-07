@@ -814,4 +814,43 @@ export default StreamForm;
 
 ![](imgs/47.png)
 ![](imgs/48.png)
+![](imgs/49.png)
 
+# Gotchas Aroud Providers
+
+* Application loads up in the browser
+* We create a context object with a default value of 'english'
+* App component gets rendered, creates a Provider that wraps UserCreate
+* Provider updates the value of the context object to 'this.state.language'
+* Button and Field reach into context object, see the value from 'this.state.language'
+* Button and Field render appropriate text to the screen
+* Each separete use of LanguageContext.Provider creates a new, separate 'pipe' of information
+
+# Why use Consumer insted of Context
+
+* You cant use more than 1 context per component.
+
+# Replacing Redux with Context?
+
+* Redux
+  * Distributes data to various components
+  * Centralizes data in a store
+  * Provides mechanism for changing data in the store
+
+* Context
+  * Distributes data to various components
+
+# If we want to use Context in place of Redux...
+* We need to be able to get data to any component in our hierarchy
+* We need to be able to separate our view logic from business logic
+* We need to be able to split up business logic (not have a single file with 100000 lines of code)
+
+# Continue using Redux
+* Redux
+  * Excellent documentation
+  * Well-known design patterns
+  * Tremendous amount of open source libs
+
+* Context
+  * No need for an extra lib
+  * Hard to build a 'store' component with cross cutting concerns
